@@ -7,14 +7,12 @@ Node Contacts GraphQL API
  - TypeScript
  - Prisma (ORM)
  - GraphQL
- - Docker
 
 
 ## Pre-requisites
  - Node
  - MySql connection* (for create and use database)  
 
-(*) MySql is not running in a docker container due to a Prisma issue (not yet resolved)  
 
 ## Create a .env file
 
@@ -38,7 +36,7 @@ $ npx prisma db push
 $ npx prisma generate
 ```
 
-## Running the app (from local node)
+## Running the app
 
 ```bash
 # development
@@ -49,4 +47,10 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+```
+
+## Execute Graphql (Playground)
+
+```bash
+http://localhost:3000/graphql
 ```
