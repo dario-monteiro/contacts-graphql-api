@@ -11,5 +11,6 @@ import { DBPrismaService } from 'src/infrastructure/db-infrastructure';
     UsuarioRepository,
     DBPrismaService,
   ],
+  exports: [UsuarioService, UsuarioRepository, DBPrismaService],
 })
 export class UsuarioModule {}

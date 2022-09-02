@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { UsuarioModule } from './modules/usuario/usuario.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     UsuarioModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
