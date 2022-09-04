@@ -19,15 +19,10 @@ type Query {
 }
 
 type Mutation {
-  createUsuario(createUsuarioInput: CreateUsuarioInput!): Usuario!
   updateUsuario(updateUsuarioInput: UpdateUsuarioInput!): Usuario!
   removeUsuario(id: Int!): Usuario!
   login(loginUserInput: LoginUserInput!): LoginResponse!
-}
-
-input CreateUsuarioInput {
-  email: String!
-  senha: String!
+  signup(loginUserInput: LoginUserInput!): Usuario!
 }
 
 input UpdateUsuarioInput {

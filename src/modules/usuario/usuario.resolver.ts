@@ -1,7 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UsuarioService } from './usuario.service';
 import { Usuario } from './entities/usuario.entity';
-import { CreateUsuarioInput } from './dto/create-usuario.input';
 import { UpdateUsuarioInput } from './dto/update-usuario.input';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -9,13 +8,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @Resolver(() => Usuario)
 export class UsuarioResolver {
   constructor(private readonly usuarioService: UsuarioService) {}
-
-  @Mutation(() => Usuario)
-  createUsuario(
-    @Args('createUsuarioInput') createUsuarioInput: CreateUsuarioInput,
-  ) {
-    return this.usuarioService.create(createUsuarioInput);
-  }
 
   @Query(() => [Usuario], { name: 'usuarios' })
   @UseGuards(JwtAuthGuard)
@@ -30,6 +22,7 @@ export class UsuarioResolver {
   }
 
   @Mutation(() => Usuario)
+  @UseGuards(JwtAuthGuard)
   updateUsuario(
     @Args('updateUsuarioInput') updateUsuarioInput: UpdateUsuarioInput,
   ) {
@@ -40,6 +33,7 @@ export class UsuarioResolver {
   }
 
   @Mutation(() => Usuario)
+  @UseGuards(JwtAuthGuard)
   removeUsuario(@Args('id', { type: () => Int }) id: number) {
     return this.usuarioService.remove(id);
   }

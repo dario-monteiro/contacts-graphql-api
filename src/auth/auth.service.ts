@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { UsuarioService } from 'src/modules/usuario/usuario.service';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import { LoginUserInput } from './dto/login-user.input';
+import { CreateUsuarioInput } from 'src/modules/usuario/dto/create-usuario.input';
 
 @Injectable()
 export class AuthService {
@@ -33,5 +35,18 @@ export class AuthService {
       }),
       user,
     };
+  }
+
+  async signup(loginUserInput: LoginUserInput) {
+    const user = await this.usuarioService.findUsuarioByEmail(
+      loginUserInput.username,
+    );
+    if (user) {
+      throw new Error('User already exists!');
+    }
+    const newUser: CreateUsuarioInput = new CreateUsuarioInput();
+    newUser.email = loginUserInput.username;
+    newUser.senha = await bcrypt.hash(loginUserInput.password, 10);
+    return this.usuarioService.create(newUser);
   }
 }

@@ -9,7 +9,6 @@ export class UsuarioService {
   constructor(private readonly repository: UsuarioRepository) {}
 
   async create(createUsuarioInput: CreateUsuarioInput) {
-    createUsuarioInput.senha = await bcrypt.hash(createUsuarioInput.senha, 10);
     return await this.repository.create(createUsuarioInput);
   }
 
